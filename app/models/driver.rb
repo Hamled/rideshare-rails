@@ -31,4 +31,9 @@ class Driver < ApplicationRecord
   def pickup!
     current_trip.update(status: :travel)
   end
+
+  def dropoff!
+    current_trip.update(status: :dropoff,
+                        price: rand(1000) / 10.0)
+  end
 end

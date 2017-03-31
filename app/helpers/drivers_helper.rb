@@ -18,6 +18,9 @@ module DriversHelper
     when 'pickup'
       text = 'Confirm pickup'
       action = :pickup
+    when 'travel'
+      text = 'Confirm dropoff'
+      action = :dropoff
     else
       return
     end

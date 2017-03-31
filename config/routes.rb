@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       post 'activate'
       post 'pickup'
+      post 'dropoff'
     end
   end
 
