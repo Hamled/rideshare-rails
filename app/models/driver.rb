@@ -23,4 +23,12 @@ class Driver < ApplicationRecord
   def make_and_model
     "#{car_make} #{car_model}"
   end
+
+  def current_trip
+    trips.ongoing.first
+  end
+
+  def pickup!
+    current_trip.update(status: :travel)
+  end
 end

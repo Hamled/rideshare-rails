@@ -1,6 +1,7 @@
 class DriversController < ApplicationController
 
-  before_action :find_driver, only: [:show, :edit, :destroy, :update, :activate]
+  before_action :find_driver, only: [:show, :edit, :destroy, :update,
+                                     :activate, :pickup]
 
   def index
     @drivers = Driver.order(:name).page params[:page]
@@ -49,6 +50,11 @@ class DriversController < ApplicationController
     if @driver.toggle!(:active)
       redirect_to driver_path(@driver)
     end
+  end
+
+  def pickup
+    @driver.pickup!
+    redirect_to driver_path(@driver)
   end
 
   private
