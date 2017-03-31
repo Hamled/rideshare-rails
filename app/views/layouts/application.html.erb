@@ -43,6 +43,16 @@
     </nav>
   </header>
   <main>
+    <div id="flash-messages">
+      <% if flash[:alert].present? %>
+        <div class="alert callout" data-closable>
+          <%= flash[:alert] %>
+          <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+      <% end %>
+    </div>
+
     <%= yield %>
   </main>
   <footer>
