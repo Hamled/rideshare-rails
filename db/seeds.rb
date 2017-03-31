@@ -16,7 +16,7 @@ passengers = []
 
 50.times do
   car = CARS.sample
-  driver = Driver.new name: Faker::LordOfTheRings.character, vin: Vinbot::Vin.generate, car_make: car[0], car_model: car[1]
+  driver = Driver.new name: Faker::LordOfTheRings.character, vin: Vinbot::Vin.generate, car_make: car[0], car_model: car[1], active: rand(100) > 70
 
   while Driver.find_by(name: driver.name) != nil
     driver.name = Faker::Name.name
