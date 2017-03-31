@@ -29,11 +29,6 @@ class TripsController < ApplicationController
     end
   end
 
-  def new
-    @trip = Trip.new
-    @trip.passenger_id = params[:passenger_id].to_i
-  end
-
   def create
     trip = @passenger.request_ride!
     if trip
