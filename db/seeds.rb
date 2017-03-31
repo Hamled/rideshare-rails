@@ -32,12 +32,30 @@ end
   passengers.push(passenger)
 end
 
+# Create completed trips
 500.times do
   trip = Trip.new
-  trip.date = Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today)
+  trip.date = Faker::Date.between(1.year.ago, Date.today)
   trip.rating = 1 + rand(4) # between 1 and 5
   trip.driver = drivers.sample
   trip.passenger = passengers.sample
   trip.price = rand(1000) / 10.0
+  trip.status = :complete
+
+  trip.save
+end
+
+# Create some ongoing trips, leaving a few available drivers
+active_drivers = drivers.select {|d| d.active?}
+ongoing_trips = drivers.length - [rand(5..15), active_drivers.length].min
+
+passengers.sample(ongoing_trips).zip(active_drivers.sample(ongoing_trips)).each do |passenger, driver|
+  trip = Trip.new(passenger: passenger, driver: driver, date: Date.today)
+
+  trip.status = Trip.statuses.except("complete").keys.sample
+  if trip.status == "dropoff"
+    trip.price = rand(1000) / 10.0
+  end
+
   trip.save
 end
