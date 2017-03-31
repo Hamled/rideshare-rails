@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resources :trips
   end
 
-  resources :drivers
+  resources :drivers do
+    member do
+      post 'activate'
+    end
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
