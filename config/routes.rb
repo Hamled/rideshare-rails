@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   resources :passengers do
     resources :trips, except: [:index, :new]
+    member do
+      post 'complete_trip'
+    end
   end
 
   resources :drivers do

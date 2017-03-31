@@ -1,6 +1,6 @@
 class PassengersController < ApplicationController
 
-  before_action :find_passenger, only: [:show, :edit, :destroy, :update]
+  before_action :find_passenger, only: [:show, :edit, :destroy, :update, :complete_trip]
 
 
 
@@ -43,6 +43,13 @@ class PassengersController < ApplicationController
 
     @passenger.destroy
     redirect_to passengers_path
+  end
+
+  def complete_trip
+    redirect_to @passenger, alert: "A trip rating must be provided" unless params[:rating].present?
+
+    @passenger.complete_trip!(params[:rating])
+    redirect_to @passenger
   end
 
   private

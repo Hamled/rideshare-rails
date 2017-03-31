@@ -15,4 +15,13 @@ class Passenger < ApplicationRecord
                  driver: driver,
                  date: Date.today) if driver
   end
+
+  def current_trip
+    trips.ongoing.first
+  end
+
+  def complete_trip!(rating)
+    current_trip.update(status: :complete,
+                        rating: rating)
+  end
 end
