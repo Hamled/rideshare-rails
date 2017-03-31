@@ -1,9 +1,6 @@
 class TripsController < ApplicationController
     before_action :find_trip, only: [:show, :edit, :destroy, :update]
 
-  def index
-  end
-
   def show;  end
 
   def edit
