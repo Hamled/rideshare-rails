@@ -16,6 +16,9 @@
           Passenger
         </th>
         <th width="10%">
+          Status
+        </th>
+        <th width="10%">
           Price
         </th>
         <th width="10%">
@@ -45,6 +48,11 @@
           <p>
             <%= link_to trip.passenger.name, passenger_trip_path(trip.passenger.id) %>
           </p>
+        </td>
+        <td>
+            <p>
+              <%= trip.status.capitalize %>
+            </p>
         </td>
         <td>
             <p>
