@@ -9,6 +9,9 @@
     <h2> Phone #: <%= @passenger.phone_number %></h2>
   </section>
 </section>
+<% if @passenger.can_request? %>
+  <%= button_to "Request ride", passenger_trips_path(@passenger), method: :post, class: "button success" %>
+<% end %>
 <section class="trip-details row">
   <h2>Trips</h2>
   <%= render partial: "shared/trip_list", locals: {trips: @passenger.trips.order(:date)} %>

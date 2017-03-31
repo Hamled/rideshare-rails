@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
     before_action :find_trip, only: [:show, :edit, :destroy, :update]
+    before_action :find_passenger, only: [:create]
 
   def show;  end
 
@@ -34,11 +35,23 @@ class TripsController < ApplicationController
   end
 
   def create
+    trip = @passenger.request_ride!
+    if trip
+      redirect_to [@passenger, trip]
+    else
+      redirect_to @passenger, alert: "Could not find any available drivers"
+    end
+  rescue RideRequestError => e
+    redirect_to @passenger, alert: "Could not start a trip: #{e.message}"
   end
 
   private
     def find_trip
       @trip = Trip.find(params[:id])
+    end
+
+    def find_passenger
+      @passenger = Passenger.find(params[:passenger_id])
     end
 
     def trip_params
