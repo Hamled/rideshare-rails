@@ -8,4 +8,6 @@ class Trip < ApplicationRecord
     :dropoff, # After dropoff has been confirmed, until rating has been given by passenger (price set here)
     :complete # After rating has been given by passenger
   ]
+
+  scope :ongoing, -> { where.not(status: :complete) }
 end
