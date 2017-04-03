@@ -52,16 +52,6 @@ class DriversController < ApplicationController
     end
   end
 
-  def pickup
-    @driver.pickup!
-    redirect_to driver_path(@driver)
-  end
-
-  def dropoff
-    @driver.dropoff!
-    redirect_to driver_path(@driver)
-  end
-
   private
     def find_driver
       @driver = Driver.find(params[:id])

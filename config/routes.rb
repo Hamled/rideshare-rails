@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   resources :drivers do
     member do
       post 'activate'
-      post 'pickup'
-      post 'dropoff'
     end
   end
 
