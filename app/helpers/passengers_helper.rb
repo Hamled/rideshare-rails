@@ -1,6 +1,6 @@
 module PassengersHelper
   def passenger_trip_action_button(passenger)
-    return unless passenger.current_trip && passenger.current_trip.dropoff?
+    return unless passenger.current_trip
 
     form_tag complete_trip_passenger_path(passenger) do
       concat label_tag 'rating'
