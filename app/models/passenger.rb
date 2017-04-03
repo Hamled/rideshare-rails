@@ -13,7 +13,8 @@ class Passenger < ApplicationRecord
     driver = Driver.available.sample
     trips.create(passenger: self,
                  driver: driver,
-                 date: Date.today) if driver
+                 date: Date.today,
+                 price: rand(1000) / 10.0) if driver
   end
 
   def current_trip
