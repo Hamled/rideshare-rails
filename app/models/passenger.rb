@@ -22,7 +22,6 @@ class Passenger < ApplicationRecord
   end
 
   def complete_trip!(rating)
-    current_trip.update(status: :complete,
-                        rating: rating)
+    current_trip.update(rating: rating)
   end
 end
