@@ -5,6 +5,19 @@ class Driver < ApplicationRecord
   scope :available, -> { active }
 
   def average_rating
+    my_trips = self.trips
+
+    if my_trips == nil || my_trips.length == 0
+      return 0
+    end
+
+    total = 0
+    my_trips.each do |trip|
+      total += trip.rating
+    end
+
+    average_rating = total.to_f / my_trips.length
+
     return 1
   end
 
