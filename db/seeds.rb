@@ -40,7 +40,6 @@ end
   trip.driver = drivers.sample
   trip.passenger = passengers.sample
   trip.price = rand(1000) / 10.0
-  trip.status = :complete
 
   trip.save
 end
@@ -50,12 +49,6 @@ active_drivers = drivers.select {|d| d.active?}
 ongoing_trips = drivers.length - [rand(5..15), active_drivers.length].min
 
 passengers.sample(ongoing_trips).zip(active_drivers.sample(ongoing_trips)).each do |passenger, driver|
-  trip = Trip.new(passenger: passenger, driver: driver, date: Date.today)
-
-  trip.status = Trip.statuses.except("complete").keys.sample
-  if trip.status == "dropoff"
-    trip.price = rand(1000) / 10.0
-  end
-
+  trip = Trip.new(passenger: passenger, driver: driver, date: Date.today, price: rand(1000) / 10.0)
   trip.save
 end
