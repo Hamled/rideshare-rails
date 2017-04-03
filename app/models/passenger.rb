@@ -2,7 +2,7 @@ class Passenger < ApplicationRecord
   has_many :trips
 
   def can_request?
-    trips.where.not(status: :complete).count == 0
+    trips.ongoing.count == 0
   end
 
   def request_ride!
