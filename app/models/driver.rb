@@ -1,5 +1,7 @@
 class Driver < ApplicationRecord
   has_many :trips
+  validates :vin, presence: true
+  validates :name, presence: true
 
   scope :active, -> { where(active: true) }
   scope :available, -> { active }
@@ -12,16 +14,31 @@ class Driver < ApplicationRecord
     end
 
     total = 0
+    count = 0
     my_trips.each do |trip|
-      total += trip.rating
+      if !trip.rating.nil?
+        total += trip.rating
+        count += 1
+      end
     end
 
-    average_rating = total.to_f / my_trips.length
+    average_rating = total.to_f / count
 
-    return 1
+    return average_rating
   end
 
   def make_and_model
     "#{car_make} #{car_model}"
+  end
+
+  def total_earnings
+    sum = self.trips.sum do |trip|
+      if !trip.price.nil?
+        trip.price
+      else
+        0
+      end
+    end
+    return sum
   end
 end

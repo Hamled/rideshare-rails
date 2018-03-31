@@ -1,5 +1,8 @@
 class Passenger < ApplicationRecord
   has_many :trips
+  validates :name, presence: true
+  validates :phone_number, presence: true
+
 
   def can_request?
     trips.ongoing.count == 0
@@ -23,5 +26,16 @@ class Passenger < ApplicationRecord
 
   def complete_trip!(rating)
     current_trip.update(rating: rating)
+  end
+
+  def total_charged
+    sum = self.trips.sum do |trip|
+      if !trip.price.nil?
+        trip.price
+      else
+        0
+      end
+    end
+    return sum
   end
 end
