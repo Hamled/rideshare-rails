@@ -57,7 +57,7 @@ h2, h3 {
 }
 
 section.passenger-name {
-  grid-column: 3 / span 1;
+  grid-column: 2 / span 1;
 }
 
 section.passenger-phone {
