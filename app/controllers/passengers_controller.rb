@@ -5,7 +5,7 @@ class PassengersController < ApplicationController
 
 
   def index
-    @passengers = Passenger.order(:name).page params[:page]
+    @passengers = Passenger.order(:name).page(params[:page]).per(10)
   end
 
   def show
@@ -20,6 +20,15 @@ class PassengersController < ApplicationController
 
     if passenger.save
       redirect_to passengers_path
+    else
+      flash[:alert] = ""
+      passenger.errors.messages.keys.each do |key|
+        passenger.errors.messages[key].each do |msg|
+          flash[:alert] = "#{flash[:alert]} #{flash[:alert] == "" ? "": "<br>"}  #{key}:  #{msg}"
+        end
+      end
+
+      redirect_back(fallback_location: passengers_path)
     end
   end
 
@@ -32,6 +41,15 @@ class PassengersController < ApplicationController
 
     if @passenger.save
       redirect_to passenger_path(@passenger.id)
+    else
+      flash[:alert] = ""
+      passenger.errors.messages.keys.each do |key|
+        passenger.errors.messages[key].each do |msg|
+          flash[:alert] = "#{flash[:alert]} #{flash[:alert] == "" ? "": "<br>"}  #{key}:  #{msg}"
+        end
+      end
+
+      redirect_back(fallback_location: passengers_path)
     end
   end
 

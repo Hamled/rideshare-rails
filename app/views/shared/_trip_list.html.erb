@@ -53,7 +53,11 @@
         </td>
         <td>
           <p>
-            <%= trip.rating %>
+            <% if trip.rating.nil? %>
+              <%= passenger_trip_action_button(trip.passenger) %>
+            <% else %>
+              <%= trip.rating %>
+            <% end %>
           </p>
         </td>
         <td>

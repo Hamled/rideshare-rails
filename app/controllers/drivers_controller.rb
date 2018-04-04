@@ -4,7 +4,7 @@ class DriversController < ApplicationController
                                      :activate, :pickup, :dropoff]
 
   def index
-    @drivers = Driver.order(:name).page params[:page]
+    @drivers = Driver.order(:name).page(params[:page]).per(10)
   end
 
   def show;  end
@@ -18,6 +18,16 @@ class DriversController < ApplicationController
 
     if driver.save
       redirect_to drivers_path
+    else
+      flash[:alert] = ""
+      driver.errors.messages.keys.each do |key|
+        driver.errors.messages[key].each do |msg|
+          flash[:alert] = "#{flash[:alert]} #{flash[:alert] == "" ? "": "<br>"}  #{key}:  #{msg}"
+        end
+      end
+
+      redirect_back(fallback_location: drivers_path)
+
     end
   end
 
@@ -31,6 +41,14 @@ class DriversController < ApplicationController
     @driver.car_model = driver_params[:car_model]
     if @driver.save
       redirect_to driver_path(@driver.id)
+    else
+      flash[:alert] = ""
+      driver.errors.messages.keys.each do |key|
+        driver.errors.messages[key].each do |msg|
+          flash[:alert] = "#{flash[:alert]} #{flash[:alert] == "" ? "": "<br>"}  #{key}:  #{msg}"
+        end
+      end
+      redirect_back(fallback_location: drivers_path)
     end
   end
 

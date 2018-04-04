@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'jquery-turbolinks' 
+gem 'jquery-turbolinks'
 gem 'awesome_print'
 gem 'kaminari'
 gem 'foundation-rails'
@@ -43,9 +43,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   # For seeding
-  gem 'vinbot'
   gem 'faker'
+  gem 'pry-rails'
 end
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

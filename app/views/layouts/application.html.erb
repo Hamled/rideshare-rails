@@ -13,40 +13,51 @@
 
 <body>
   <header>
-    <nav>
-      <div class="title-bar" data-responsive-toggle="example-animated-menu" data-hide-for="medium">
-  <button class="menu-icon" type="button" data-toggle></button>
-  <div class="title-bar-title">Menu</div>
-</div>
 
-<div class="top-bar" id="example-animated-menu" data-animate="hinge-in-from-top spin-out">
-  <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text"><%= link_to "Rideshare on Rails!", root_path %></li>
-      <li>
-        <a href="/drivers">Drivers</a>
-        <ul class="menu vertical">
-          <li><a href="/drivers/new">Add a Driver</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="/passengers">Passengers</a>
-        <ul class="menu vertical">
-          <li>
-            <a href="/passengers/new">Add a Passenger</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</div>
+    <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+    		<button class="menu-icon" type="button" data-toggle></button>
+    		<div class="title-bar-title">Menu</div>
+    </div>
+
+    <nav class="top-bar" id="example-menu">
+    		<section class="top-bar-right">
+    				<ul class="menu">
+    						<li class="menu-text">Menu</li>
+    				</ul>
+    		</section>
+    		<section class="top-bar-left">
+    				<ul class=" medium-horizontal vertical dropdown menu" data-responsive-menu="accordion medium-dropdown">
+                <li>
+  							  <%= link_to "Rideshare on Rails!", root_path %>
+                </li>
+                <li class="has-submenu ">
+                    <a href="/drivers">Drivers</a>
+    								<ul class="submenu menu vertical nested " data-submenu>
+                        <li>
+                          <%= link_to "Driver List", drivers_path %>
+                        </li>
+    										<li><a href="/drivers/new">Add a Driver</a></li>
+    								</ul>
+    						</li>
+                <li class="has-submenu ">
+                    <a href="/passengers">Passengers</a>
+    								<ul class="submenu menu vertical nested " data-submenu>
+                        <li>
+                          <%= link_to "Passenger List", passengers_path %>
+                        </li>
+    										<li><a href="/passengers/new">Add a Passenger</a></li>
+    								</ul>
+    						</li>
+    				</ul>
+    		</section>
     </nav>
+
   </header>
   <main>
     <div id="flash-messages">
       <% if flash[:alert].present? %>
         <div class="alert callout" data-closable>
-          <%= flash[:alert] %>
+          <%= flash[:alert].html_safe %>
           <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
             <span aria-hidden="true">&times;</span>
           </button>

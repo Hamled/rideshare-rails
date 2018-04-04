@@ -1,19 +1,21 @@
-<section class="row passenger-header">
-  <section class="column small-2">
-    <%= image_tag "http://www.fillmurray.com/50/50", alt: @passenger.name, class: "passenger"%>
+<section class=" passenger-header">
+  <section class="passenger-img">
+    <%= image_tag "https://placeimg.com/50/50/people?image=#{rand(0..100)}", alt: @passenger.name, class: "passenger" %>
   </section>
-  <section class="column small-6">
+  <section class="passenger-name">
     <h2><%= @passenger.name %></h1>
   </section>
-  <section class="column small-4">
+  <section class="passenger-phone">
     <h2> Phone #: <%= @passenger.phone_number %></h2>
+  </section>
+  <section class="passenger-paid">
+    <h2>Total Paid:  <%= number_to_currency @passenger.total_charged %></h2>
   </section>
 </section>
 <% if @passenger.can_request? %>
   <%= button_to "Request ride", passenger_trips_path(@passenger), method: :post, class: "button success" %>
 <% end %>
-<%= passenger_trip_action_button(@passenger) %>
-<section class="trip-details row">
+<section class="trip-details">
   <h2>Trips</h2>
   <%= render partial: "shared/trip_list", locals: {trips: @passenger.trips.order(:date)} %>
 </section>
